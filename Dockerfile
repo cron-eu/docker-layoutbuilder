@@ -58,3 +58,6 @@ RUN cd / && apk --update add git make g++ \
   && cd / && rm -rf /woff2 \
   && apk del git g++ \
   && rm /var/cache/apk/*
+
+# install git
+RUN apk add --update git
