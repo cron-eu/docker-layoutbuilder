@@ -49,3 +49,12 @@ RUN apk --update add libxml2-dev alpine-sdk xz poppler-dev pango-dev m4 libtool 
     apk add libpng python freetype glib libintl libxml2 libltdl cairo && \
     rm /var/cache/apk/* && \
     rm -rf /fontforge /libspiro /libuninameslist
+
+RUN cd / && apk --update add git make g++ \
+  && git clone --recursive https://github.com/google/woff2.git \
+  && cd /woff2 \
+  && make all \
+  && mv woff2_compress /usr/local/bin/ && mv woff2_decompress /usr/local/bin/ \
+  && cd / && rm -rf /woff2 \
+  && apk del git g++ \
+  && rm /var/cache/apk/*
