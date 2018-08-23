@@ -55,7 +55,18 @@ RUN apk --update add git make g++ \
   && apk del git make g++ \
   && rm /var/cache/apk/*
 
-# install git (needed for bower) and make/g++ (needed for a later npm rebuild node-sass)
-RUN apk --update add python git make g++ && rm /var/cache/apk/*
-RUN npm install -g bower && npm install -g gulp
-#RUN npm config set python /usr/bin/python2.7 && npm install gulp-sass@2.2.0 -g
+# install git (needed for bower)
+RUN apk --update add git \
+  && npm install -g bower && npm install -g gulp  \
+  && rm /var/cache/apk/*
+
+# Install make and g++ temporary (to compile gulp-sass)
+# Note: python is already installed
+RUN apk --update add make g++ && rm /var/cache/apk/* \
+  && npm config set python /usr/bin/python2.7 \
+  && npm install gulp-sass@2.2.0 -g \
+  && apk del g++ make
+
+# Install make (needed for fontcustom)
+RUN apk --update add make \
+  && rm /var/cache/apk/*
