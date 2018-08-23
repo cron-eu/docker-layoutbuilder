@@ -59,5 +59,6 @@ RUN cd / && apk --update add git make g++ \
   && apk del git g++ \
   && rm /var/cache/apk/*
 
-# install git
-RUN apk add --update git
+# install git (needed for bower) and make/g++ (needed for a later npm rebuild node-sass)
+RUN apk add --update git g++ make \
+  && rm /var/cache/apk/*
