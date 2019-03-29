@@ -12,8 +12,8 @@
 # IMAGE_NAME: the name and tag of the Docker repository being built.
 # (This variable is a combination of  DOCKER_REPO:DOCKER_TAG.)
 
-# our docker tags are e.g. "node6-sass-2.2.0"
+# our docker tags are e.g. "node6-sass2.2.0"
 # SASS_VERSION ARG is something like "2.2.0" or "3.1.0"
 
-docker build --build-arg SASS_VERSION="${DOCKER_TAG#node6-sass-}" \
+docker build --build-arg SASS_VERSION="${DOCKER_TAG#node6-sass}" \
   -t $IMAGE_NAME .
