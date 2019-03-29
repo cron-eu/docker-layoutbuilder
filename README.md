@@ -1,7 +1,7 @@
 node-sass Docker Image
 ===
 
-Docker Image based on `node:alpine` with node-sass support. Additionally this
+Docker Image based on `node:strech-slim` with node-sass support. Additionally this
 image also includes:
 
 * fontcustom
@@ -18,7 +18,7 @@ Use this image using `docker run`:
 
 ```bash
 docker run --rm --volumes-from davshopbase_web_1 \
-  remuslazar/docker-node-sass:2.2.0 /bin/sh -c \
+  remuslazar/docker-node-sass:node6-sass2.2.0 /bin/sh -c \
   "cd /data/www-provisioned/Packages/Sites/CRON.DavShop/Layout ; \
    mkdir -p node_modules ; \
    [ -d node_modules/gulp-sass ] || npm link gulp-sass ; \
@@ -29,28 +29,14 @@ docker run --rm --volumes-from davshopbase_web_1 \
 
 Currently there are various image tags matching the node-sass versions:
 
-* v2.2.0
-* v3.1.0 (which is also `latest`)
+* node6-sass2.2.0: with gulp-sass 2.2.0
+* node6-sass3.1.0: with gulp-sass 3.1.0
 
-E.g. to use `node-sass`@`2.2.0` use `remuslazar/docker-node-sass:v2.2.0`
-
-### Known Limitations
-
-You will not be able to compile `gulp-sass` because `g++` is missing. To do so,
-install it manually prior to the `npm install` call:
-
-```bash
-apk --update add g++ make
-```
-
-A better approach is just using the globally installed version using `npm link`
-(see above).
+E.g. to use `node-sass`@`node6-sass2.2.0` use `remuslazar/docker-node-sass:node6-sass2.2.0`
 
 ### Development
 
-```
-docker build -t remuslazar/docker-node-sass:latest .
-```
+See `Makefile` on how to build the images.
 
 ### Author
 
