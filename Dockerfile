@@ -1,6 +1,6 @@
-FROM node:6.11.0-alpine
+FROM node:6.14.4-alpine
 
-ENV SASS_VERSION 2.2.0
+ENV SASS_VERSION 4.0.2
 
 # install fontcustom and sfnt2woff
 RUN apk --update add curl make gcc libc-dev zlib-dev \

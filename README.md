@@ -18,12 +18,22 @@ Use this image using `docker run`:
 
 ```bash
 docker run --rm --volumes-from davshopbase_web_1 \
-  remuslazar/docker-node-sass:latest /bin/sh -c \
+  remuslazar/docker-node-sass:2.2.0 /bin/sh -c \
   "cd /data/www-provisioned/Packages/Sites/CRON.DavShop/Layout ; \
    mkdir -p node_modules ; \
    [ -d node_modules/gulp-sass ] || npm link gulp-sass ; \
    npm install ; bower install -s -f --allow-root ; gulp --neos"
 ```
+
+### node-sass Versions
+
+Currently there are various image tags matching the node-sass versions:
+
+* 2.2.0
+* 3.1.0
+* 4.0.2 (which is also `latest`)
+
+E.g. to use `node-sass`@`2.2.0` use `remuslazar/docker-node-sass:2.2.0`
 
 ### Known Limitations
 
@@ -36,6 +46,12 @@ apk --update add g++ make
 
 A better approach is just using the globally installed version using `npm link`
 (see above).
+
+### Development
+
+```
+docker build -t remuslazar/docker-node-sass:latest .
+```
 
 ### Author
 
