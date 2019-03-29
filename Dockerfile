@@ -15,6 +15,11 @@ RUN set -ex && apt-get update \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /root/.gem
 
+# Install git and make (bower requires git)
+RUN set -ex && apt-get update \
+	&& apt-get install -y git make \
+	&& rm -rf /var/lib/apt/lists/* \
+
 # Build specific gulp-sass versions
 # (keep this at the end of the Dockerfile, in order to reuse previous layers):
 ARG SASS_VERSION
