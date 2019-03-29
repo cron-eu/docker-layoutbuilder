@@ -29,11 +29,10 @@ docker run --rm --volumes-from davshopbase_web_1 \
 
 Currently there are various image tags matching the node-sass versions:
 
-* 2.2.0
-* 3.1.0
-* 4.0.2 (which is also `latest`)
+* v2.2.0
+* v3.1.0 (which is also `latest`)
 
-E.g. to use `node-sass`@`2.2.0` use `remuslazar/docker-node-sass:2.2.0`
+E.g. to use `node-sass`@`2.2.0` use `remuslazar/docker-node-sass:v2.2.0`
 
 ### Known Limitations
 
