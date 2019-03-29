@@ -1,5 +1,7 @@
 FROM node:6.11.0-alpine
 
+ENV SASS_VERSION 2.2.0
+
 # install fontcustom and sfnt2woff
 RUN apk --update add curl make gcc libc-dev zlib-dev \
  && curl -o code.zip -Ls http://pkgs.fedoraproject.org/repo/pkgs/woff/woff-code-latest.zip/1dcdbc9a7f48086185740c185d822279/woff-code-latest.zip \
@@ -64,7 +66,7 @@ RUN apk --update add git \
 # Note: python is already installed
 RUN apk --update add make g++ && rm /var/cache/apk/* \
   && npm config set python /usr/bin/python2.7 \
-  && npm install gulp-sass@2.2.0 -g \
+  && npm install gulp-sass@${SASS_VERSION} -g \
   && apk del g++ make
 
 # Install make (needed for fontcustom)
