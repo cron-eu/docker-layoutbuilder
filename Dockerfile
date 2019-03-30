@@ -6,11 +6,17 @@ RUN set -ex && apt-get update \
 		woff-tools fontforge \
 	&& rm -rf /var/lib/apt/lists/*
 
-# Install fontcustom
+# Install fontcustom (and woff2 from source)
 RUN set -ex && apt-get update \
-	&& apt-get install -y ruby ruby-dev build-essential \
+	&& apt-get install -y ruby ruby-dev build-essential git \
 	&& gem install fontcustom \
-	&& apt-get --purge remove -y build-essential ruby-dev \
+	&& cd / \
+	&& git clone --recursive https://github.com/google/woff2.git \
+	&& cd woff2 \
+	&& make all \
+	&& mv woff2_compress /usr/local/bin/ && mv woff2_decompress /usr/local/bin/ \
+	&& cd / && rm -rf /woff2 \
+	&& apt-get --purge remove -y build-essential ruby-dev git \
 	&& apt-get autoremove -y \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /root/.gem
