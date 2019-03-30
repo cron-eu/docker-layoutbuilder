@@ -1,4 +1,2 @@
-build: latest
-
-latest:
-	docker build -t remuslazar/docker-node-sass:latest .
+build:
+	docker build -t remuslazar/docker-node-sass:node6 .

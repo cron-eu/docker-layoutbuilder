@@ -12,11 +12,15 @@ image also includes:
 * fontforge
 * woff2
 
+### Node version
+
+Currently only node6 is supported (based on the node:6-stretch-slim official image)
+
 ### Usage
 
 ```bash
 docker run --rm --volumes-from davshopbase_web_1 \
-  remuslazar/docker-node-sass:node6-sass2.2.0 /bin/sh -c \
+  remuslazar/docker-node-sass:node6 /bin/sh -c \
   "cd /data/www-provisioned/Packages/Sites/CRON.DavShop/Layout ; \
    mkdir -p node_modules ; \
    npm install ; bower install -s -f --allow-root ; gulp --neos"
