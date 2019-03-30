@@ -24,13 +24,9 @@ RUN set -ex && apt-get update \
 # Install git and make (bower requires git)
 RUN set -ex && apt-get update \
 	&& apt-get install -y git make \
-	&& rm -rf /var/lib/apt/lists/* \
-
-# Build specific gulp-sass versions
-# (keep this at the end of the Dockerfile, in order to reuse previous layers):
-ARG SASS_VERSION
+	&& rm -rf /var/lib/apt/lists/*
 
 # Install bower gulp and gulp-sass in the desired version
 RUN set -ex \
-	&& npm install -g bower gulp gulp-sass@${SASS_VERSION} \
+	&& npm install -g bower gulp \
 	&& rm -rf /root/.npm
