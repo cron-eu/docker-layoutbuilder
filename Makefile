@@ -1,2 +1,2 @@
 build:
-	docker build -t remuslazar/docker-node-sass:node6 .
+	docker build -t croneu/layoutbuilder:node6-fontcustom .
