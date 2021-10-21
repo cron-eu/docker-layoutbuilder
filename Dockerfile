@@ -9,7 +9,7 @@ RUN set -ex && apt-get update \
 # Install fontcustom (and woff2 from source)
 RUN set -ex && apt-get update \
 	&& apt-get install -y ruby ruby-dev build-essential git \
-	&& gem install fontcustom \
+	&& gem install fontcustom -v 1.3.8 \
 	&& cd / \
 	&& git clone --recursive https://github.com/google/woff2.git \
 	&& cd woff2 \
@@ -20,6 +20,14 @@ RUN set -ex && apt-get update \
 	&& apt-get autoremove -y \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /root/.gem
+
+# manually remove expired letsencrypt X3 certificate and install the new ISRG X1 root CA
+RUN set -ex \
+	&& mkdir -p /usr/share/ca-certificates/letsencrypt/ \
+	&& cd /usr/share/ca-certificates/letsencrypt/ \
+	&& curl -kLO https://letsencrypt.org/certs/isrgrootx1.pem \
+	&& perl -i.bak -pe 's/^(mozilla\/DST_Root_CA_X3.crt)/!$1/g' /etc/ca-certificates.conf \
+	&& update-ca-certificates
 
 # Install git and make (bower requires git)
 RUN set -ex && apt-get update \
