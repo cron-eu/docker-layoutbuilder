@@ -9,7 +9,7 @@ RUN set -ex && apt-get update \
 # Install fontcustom (and woff2 from source)
 RUN set -ex && apt-get update \
 	&& apt-get install -y ruby ruby-dev build-essential git \
-	&& gem install fontcustom \
+	&& gem install fontcustom -v 1.3.8 \
 	&& cd / \
 	&& git clone --recursive https://github.com/google/woff2.git \
 	&& cd woff2 \
