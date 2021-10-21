@@ -21,6 +21,14 @@ RUN set -ex && apt-get update \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /root/.gem
 
+# manually remove expired letsencrypt X3 certificate and install the new ISRG X1 root CA
+RUN set -ex \
+	&& mkdir -p /usr/share/ca-certificates/letsencrypt/ \
+	&& cd /usr/share/ca-certificates/letsencrypt/ \
+	&& curl -kLO https://letsencrypt.org/certs/isrgrootx1.pem \
+	&& perl -i.bak -pe 's/^(mozilla\/DST_Root_CA_X3.crt)/!$1/g' /etc/ca-certificates.conf \
+	&& update-ca-certificates
+
 # Install git and make (bower requires git)
 RUN set -ex && apt-get update \
 	&& apt-get install -y git make \
